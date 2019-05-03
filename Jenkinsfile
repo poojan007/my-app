@@ -3,17 +3,23 @@ pipeline {
     stages {
         stage('clean') {
             steps {
-                sh "mvn clean"
+               // get the mvn home path
+               def mvnHome = tool name: 'maven-3', type: 'maven'
+               sh "${mvnHome}/bin/mvn clean"
             }
         }
         stage('test') {
             steps {
-                sh "mvn test"
+               // get the mvn home path
+               def mvnHome = tool name: 'maven-3', type: 'maven'
+               sh "${mvnHome}/bin/mvn test"
             }
         }
         stage('package') {
             steps {
-                sh "mvn package"
+               // get the mvn home path
+               def mvnHome = tool name: 'maven-3', type: 'maven'
+               sh "${mvnHome}/bin/mvn package"
             }
         }
     }
