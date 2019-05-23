@@ -1,0 +1,25 @@
+node{
+    stage('SCM Checkout'){
+        git 'https://github.com/poojan007/my-app'
+    }
+    stage('Compile and Package'){
+        def mvnHome = tool name: 'maven-3', type: 'maven'
+        sh "${mvnHome}/bin/mvn package" 
+    }
+    stage('SonarQube analysis') {
+        // requires SonarQube Scanner 2.8+
+        def scannerHome = tool name: 'Sonar-7', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+        // def mvnHome = tool name: 'maven-3', type: 'maven'
+        withSonarQubeEnv('My SonarQube Server') {
+          sh "${scannerHome}/bin/sonar-scanner"
+        }
+    }
+    stage('Slack Notification'){
+        slackSend baseUrl: 'https://hooks.slack.com/services/', 
+        channel: '#ditt-datahub', 
+        color: 'good', 
+        message: 'Hi this is poojan from jenkins!!!', 
+        token: 'slack-token', 
+        tokenCredentialId: 'slack-token'   
+    }
+}
