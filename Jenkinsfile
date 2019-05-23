@@ -14,7 +14,7 @@ node{
         slackSend baseUrl: 'https://hooks.slack.com/services/', 
         channel: '#ditt-datahub', 
         color: 'good', 
-        message: 'Testing slack notification feature!!!', 
+        message: 'Hi this is poojan from jenkins!!!', 
         token: 'slack-token', 
         tokenCredentialId: 'slack-token'   
     }
