@@ -7,10 +7,9 @@ node{
         sh "${mvnHome}/bin/mvn package" 
     }
     stage('SonarQube analysis') {
-        // requires SonarQube Scanner 2.8+
         def scannerHome = tool name: 'Sonar-7', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
         // def mvnHome = tool name: 'maven-3', type: 'maven'
-        withSonarQubeEnv('My SonarQube Server') {
+        withSonarQubeEnv('sonar-7') {
           sh "${scannerHome}/bin/sonar-scanner"
         }
     }
