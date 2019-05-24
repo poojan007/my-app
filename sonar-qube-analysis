@@ -7,10 +7,9 @@ node{
         sh "${mvnHome}/bin/mvn package" 
     }
     stage('SonarQube analysis') {
-        def scannerHome = tool name: 'Sonar-7', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-        // def mvnHome = tool name: 'maven-3', type: 'maven'
+        def mvnHome = tool name: 'maven-3', type: 'maven'
         withSonarQubeEnv('sonar-7') {
-          sh "${scannerHome}/bin/sonar-scanner"
+          sh "${mvnHome}/bin/sonar:sonar"
         }
     }
     stage('Slack Notification'){
