@@ -3,8 +3,7 @@ node{
         git 'https://github.com/poojan007/my-app'
     }
     stage('Compile and Package'){
-        def mvnHome = tool name: 'maven-3', type: 'maven'
-        sh "${mvnHome}/bin/mvn package" 
+        sh "mvn package" 
     }
     stage('Email Notification'){
         mail bcc: '', body: '''Hi welcome to jenkins email alerts
